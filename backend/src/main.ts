@@ -10,7 +10,8 @@ async function bootstrap() {
   });
 
   const configService = app.get(ConfigService);
-  const port = configService.get<number>('PORT') || process.env.PORT || 8000;
+  // Hostinger requirement: Use process.env.PORT (they will set this)
+  const port = process.env.PORT || configService.get<number>('PORT') || 8000;
   const isDevelopment = configService.get<string>('NODE_ENV') !== 'production';
 
   // CORS
